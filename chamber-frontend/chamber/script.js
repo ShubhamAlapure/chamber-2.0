@@ -356,8 +356,39 @@ async function goBackToResults() {
   }, 0);
 }
 
+// 🌗 THEME SWITCHER
+function initializeTheme() {
+  const themeToggle = document.getElementById("themeToggle");
+  if (!themeToggle) return;
+
+  const icon = themeToggle.querySelector("i");
+
+  // Check saved theme
+  const savedTheme = localStorage.getItem("theme") || "dark";
+  if (savedTheme === "light") {
+    document.body.classList.add("light-theme");
+    if (icon) {
+      icon.className = "fas fa-sun";
+    }
+  } else {
+    document.body.classList.remove("light-theme");
+    if (icon) {
+      icon.className = "fas fa-moon";
+    }
+  }
+
+  themeToggle.addEventListener("click", () => {
+    const isLight = document.body.classList.toggle("light-theme");
+    localStorage.setItem("theme", isLight ? "light" : "dark");
+    if (icon) {
+      icon.className = isLight ? "fas fa-sun" : "fas fa-moon";
+    }
+  });
+}
+
 // 🚀 INIT
 document.addEventListener("DOMContentLoaded", function () {
+  initializeTheme();
   loadLaws();
   initializeClassifications();
   setupModal();
@@ -518,6 +549,8 @@ function initParticles() {
 
   function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const isLight = document.body.classList.contains("light-theme");
+    const linkColor = isLight ? "0, 0, 0" : "255, 255, 255";
 
     // 1. Draw connection line from mouse pointer to nearby background particles
     if (mouse.x !== null && mouse.y !== null) {
@@ -551,7 +584,7 @@ function initParticles() {
           ctx.beginPath();
           ctx.moveTo(particles[i].x, particles[i].y);
           ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = `rgba(255, 255, 255, ${0.035 * (1 - dist / 110)})`;
+          ctx.strokeStyle = `rgba(${linkColor}, ${0.035 * (1 - dist / 110)})`;
           ctx.lineWidth = 0.5;
           ctx.stroke();
         }
