@@ -4,7 +4,7 @@ export default async function handler(req, res) {
 
   // 🌐 CORS
   const allowedOrigins = [
-    "https://chamber-2-0.vercel.app", // ⚠️ Update this with your actual production frontend URL once deployed on Vercel
+    "https://chamber-beta.vercel.app",
     "http://localhost:3000"
   ];
 
