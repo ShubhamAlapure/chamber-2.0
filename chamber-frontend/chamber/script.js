@@ -2,7 +2,7 @@ const SUPABASE_URL = "https://vabqwsoaqpapxsmemaxw.supabase.co";
 const SUPABASE_KEY = "sb_publishable_BpzTnxe-unBnSsdfdKUZ0Q__9L1ZZaJ";
 const BACKEND_URL = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
   ? "http://localhost:3001/api/chat"
-  : "https://chamber-backend-2-0.vercel.app/api/chat"; // ⚠️ Update this with your actual production backend URL once deployed on Vercel
+  : "https://chamber-backend1-six.vercel.app/api/chat";
 
 let laws_new = [];
 let currentLang = "en";
